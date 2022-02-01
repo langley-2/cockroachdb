@@ -11,7 +11,7 @@ In the current cockroachDB environment that has been configured on aws-cluster-s
 * In our current environment, there is an SSL secure cockroach-client pod in the test-cockroachdb namespace.
 * This pod can be accessed using: `oc rsh cockroach-client -n test-cockroachdb`
 
-* start the sql client: `./cockroach sql --insecure --host cockroachdb-sample-public`
+* Start the sql client: `./cockroach sql --insecure --host cockroachdb-sample-public`
 
 * Set cluster.preserve_downgrade_option, where $current_version is the CockroachDB version currently running (e.g., 19.2):
 
@@ -19,7 +19,7 @@ In the current cockroachDB environment that has been configured on aws-cluster-s
 SET CLUSTER SETTING cluster.preserve_downgrade_option = '$current_version';
 ```
 
-* exit the shell and delete the temporary pod using: `\q`
+* Exit the shell and delete the temporary pod using: `\q`
 
 Alternately, you could launch a fresh interactive pod and start the built in sql client using: 
 ```
@@ -35,7 +35,7 @@ After you have entered the SQL session, run the following step:
 SET CLUSTER SETTING cluster.preserve_downgrade_option = '$current_version';
 ```
 
-* exit the shell and delete the temporary pod using: `\q`
+* Exit the shell and delete the temporary pod using: `\q`
 
 
 ### updating the max-disk-temp-storage to execute the TPC-C test 
@@ -49,11 +49,11 @@ disk budget exceeded: 1048576 bytes requested, 0 currently allocated, 0 bytes in
 * This error is due to the `max-disk-temp-storage` value being set to 0 by default 
 
 * If you deployed using the Helm chart
-    * change the `max-disk-temp-storage` value from 0 to 256MiB in   
+    * Change the `max-disk-temp-storage` value from 0 to 256MiB in   
     ```
     /cockroachdb/charts/cockroachdb-multicluster/charts/cockroachdb/values.yaml
     ```
-    * redeploy the Helm chart on each cluster that is part of the cockroachDB deployment 
+    * Redeploy the Helm chart on each cluster that is part of the cockroachDB deployment 
 
 * If you deployed CockroachDB manually:
     * You will need to edit the StatefulSet of the cockroachdb deployment. 
@@ -78,7 +78,7 @@ disk budget exceeded: 1048576 bytes requested, 0 currently allocated, 0 bytes in
               --locality=region=${region},zone=${zone}
     ```
     * This could be done by:  
-         * editing the YAML directly and applying it
-         * editing the stateful set inside the OpenShift CLI 
+         * Editing the YAML directly and applying it
+         * Editing the stateful set inside the OpenShift CLI 
          * Using an `oc patch` command
-    * choose whichever is most suitable for your deployment. 
+    * Choose whichever is most suitable for your deployment. 
